@@ -1,0 +1,15 @@
+extends Area2D
+
+export(Array, Sprite) var sprites = []
+export(float) var sprite_duration = 1.0
+
+var current_time = 0.0
+var current_sprite = 0
+
+func _process(delta):
+    current_time += delta
+
+    if current_time >= sprite_duration:
+        current_sprite = (current_sprite + 1) % sprites.size()
+        get_node("Sprite").set_texture(sprites[current_sprite].get_texture())
+        current_time = 0.0
